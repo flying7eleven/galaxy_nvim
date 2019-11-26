@@ -1,0 +1,22 @@
+---
+- name: Install neovim and related components (Arch Linux)...
+  become: yes
+  pacman: name={{ item }} state=latest
+  with_items:
+    - neovim
+  when: ansible_os_family == 'Arch Linux' or ansible_os_family == 'Archlinux'
+
+- name: Install neovim and related components (Debian)...
+  become: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - neovim
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure that the directories for the neovim configuration exist...
+  with_items:
+    - ~/.config/nvim
+  file: path={{ item }} state=directory
+
+- name: Install neovim configuration for the user
+  template: src=init.vim.j2 dest=~/.config/nvim/init.vim
