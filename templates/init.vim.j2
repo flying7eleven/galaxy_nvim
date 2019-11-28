@@ -21,9 +21,21 @@ Plug 'diepm/vim-rest-console'
 " finish the plugin installation
 call plug#end()
 
+" set the leader key
+:let mapleader = ","
+
 " show matching brackets
 set showmatch
 
-" show line numbers
+" default numbering settings
 set number
-
+set rnu
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+    set number
+  else
+    set rnu
+  endif
+endfunc " Toggle between normal and relative numbering.
+nnoremap <leader>r :call NumberToggle()<cr>
