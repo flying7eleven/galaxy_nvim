@@ -1,7 +1,8 @@
 galaxy_nvim
 ==========
 
-This role can be used to install and set up `neovim` on your linux computer.
+This role can be used to install and set up `neovim` on your linux computer. **WARNING**: Be aware, that on Debian/Ubuntu computers,
+this playbook will only install the configuration files, not neovim itself.
 
 Requirements
 ------------
