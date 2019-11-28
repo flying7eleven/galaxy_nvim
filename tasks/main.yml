@@ -6,17 +6,33 @@
     - neovim
   when: ansible_os_family == 'Arch Linux' or ansible_os_family == 'Archlinux'
 
-- name: Install neovim and related components (Debian)...
-  become: yes
-  apt: name={{ item }} state=latest
-  with_items:
-    - neovim
-  when: ansible_os_family == 'Debian'
-
 - name: Ensure that the directories for the neovim configuration exist...
   with_items:
     - ~/.config/nvim
+    - ~/.local/share/nvim/site/autoload
+    - ~/.local/share/nvim/site/plugged
   file: path={{ item }} state=directory
 
 - name: Install neovim configuration for the user
   template: src=init.vim.j2 dest=~/.config/nvim/init.vim
+
+- name: Installing the Plugin-Manager vim-plug...
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: ~/.local/share/nvim/site/autoload/plug.vim
+    mode: '0440'
+
+- name: Ensure all plugins are installed...
+  command: nvim +PluginInstall +qall
+
+- name: Ensure all language server plugins are installed...
+  with_items:
+    - coc-css
+    - coc-java
+    - coc-jest
+    - coc-json
+    - coc-prettier
+    - coc-python
+    - coc-rls
+    - coc-yaml
+  command: nvim +\"CocInstall {{item}}\" +qall

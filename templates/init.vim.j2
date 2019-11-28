@@ -1,12 +1,29 @@
-" ensure the encoding will be interpreted correctly
-scriptencoding utf-8
-set encoding=utf-8
+" start the plugin section
+call plug#begin('~/.local/share/nvim/site/plugged')
 
-" disable filetype detection temporarily
-filetype off
+" IntelliSense engine for nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree'
+"Plug 'tsony-tsonev/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'scrooloose/nerdcommenter'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'morhetz/gruvbox'
+Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+Plug 'unkiwii/vim-nerdtree-sync'
+Plug 'diepm/vim-rest-console'
+
+" finish the plugin installation
+call plug#end()
 
 " show matching brackets
 set showmatch
 
 " show line numbers
 set number
+
